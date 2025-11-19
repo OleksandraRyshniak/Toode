@@ -44,6 +44,7 @@ namespace epood_toode
             this.epood_lbl.Size = new System.Drawing.Size(288, 27);
             this.epood_lbl.TabIndex = 0;
             this.epood_lbl.Text = "Tere tulemast e-poodi !";
+            this.epood_lbl.Click += new System.EventHandler(this.epood_lbl_Click);
             // 
             // muuja_btn
             // 

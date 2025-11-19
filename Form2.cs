@@ -34,5 +34,10 @@ namespace epood_toode
             muuja_form Muuja = new muuja_form();
             Muuja.Show();
         }
+
+        private void epood_lbl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

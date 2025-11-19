@@ -16,9 +16,7 @@ namespace epood_tooded
 {
     public partial class muuja_form : Form
     {
-        //SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\opilane\source\repos\Ryshniak\Epood_Tooded\Tooded_DB.mdf;Integrated Security=True");
-        //SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\oleks\Desktop\C#\epood_tooded\epood_tooded\Tooded_DB.mdf");
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\opilane\source\repos\epood_toode\Tooded_DB.mdf");
+        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\opilane\source\repos\Ryshniak\Tooded_DB.mdf");
         SqlCommand command;
         SqlDataAdapter adapter_toode, adapter_kategooria;
         public muuja_form()
@@ -78,8 +76,7 @@ namespace epood_tooded
                 }
             }
             dataGridView1.Columns.Add(combo_kat);
-            // pb.Image = Image.FromFile(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\Ryshniak\Epood_Tooted\images"), "pood.png"));
-            pb.Image = Image.FromFile(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\epood_toode\images"), "pood.png"));
+            pb.Image = Image.FromFile(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\Ryshniak\images"), "pood.png"));
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
             connect.Close();
         }
@@ -193,6 +190,7 @@ namespace epood_tooded
                 }
                 NaitaAndmed();
                 MessageBox.Show("Andmed uuendatud");
+                puhasta_btn_Click(sender, e);
             }
             else
             {
@@ -226,9 +224,7 @@ namespace epood_tooded
             kogus_text_box.Text = "";
             hind_text_box.Text = "";
             kat_com_box.SelectedItem = null;
-
-            //using (FileStream fs = new FileStream(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\Ryshniak\Epood_Tooded\Images"), "pood.png"), FileMode.Open, FileAccess.Read))
-            using (FileStream fs = new FileStream(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\epood_toode\images"), "pood.png"), FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\Ryshniak\images"), "pood.png"), FileMode.Open, FileAccess.Read))
             {
                 pb.Image = Image.FromStream(fs);
             }
@@ -241,11 +237,10 @@ namespace epood_tooded
                 return;
             }
             open = new OpenFileDialog();
-            // open.InitialDirectory = @"C:\Kasutaja\opilane\source\repos\Ryshniak\Epood_Tooded\Picture";
-            open.InitialDirectory = @"C:\Users\oleks\Desktop\C#\epood_tooded\epood_tooded\epood_pic";
+            open.InitialDirectory = @"C:\Users\opilane\source\repos\Ryshniak\epood_pic";
             open.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
 
-            FileInfo open_info = new FileInfo(@"C:\Users\opilane\source\repos\epood_toode\images" + open.FileName);
+            FileInfo open_info = new FileInfo(@"C:\Users\opilane\source\repos\Ryshniak\epood_pic" + open.FileName);
             if (open.ShowDialog() == DialogResult.OK && toode_text_box.Text != null)
             {
                 save = new SaveFileDialog();
