@@ -43,16 +43,19 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(515, 81);
+            this.dataGridView1.Location = new System.Drawing.Point(687, 100);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(224, 303);
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.Size = new System.Drawing.Size(299, 373);
             this.dataGridView1.TabIndex = 0;
             // 
             // lisa_toode_btn
             // 
-            this.lisa_toode_btn.Location = new System.Drawing.Point(60, 418);
+            this.lisa_toode_btn.Location = new System.Drawing.Point(208, 492);
+            this.lisa_toode_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lisa_toode_btn.Name = "lisa_toode_btn";
-            this.lisa_toode_btn.Size = new System.Drawing.Size(250, 30);
+            this.lisa_toode_btn.Size = new System.Drawing.Size(333, 37);
             this.lisa_toode_btn.TabIndex = 1;
             this.lisa_toode_btn.Text = "Lisa toode";
             this.lisa_toode_btn.UseVisualStyleBackColor = true;
@@ -60,18 +63,20 @@
             // 
             // maksma
             // 
-            this.maksma.Location = new System.Drawing.Point(598, 390);
+            this.maksma.Location = new System.Drawing.Point(855, 480);
+            this.maksma.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.maksma.Name = "maksma";
-            this.maksma.Size = new System.Drawing.Size(87, 31);
+            this.maksma.Size = new System.Drawing.Size(116, 38);
             this.maksma.TabIndex = 3;
             this.maksma.Text = "Maksma";
             this.maksma.UseVisualStyleBackColor = true;
             // 
             // kust_1
             // 
-            this.kust_1.Location = new System.Drawing.Point(515, 390);
+            this.kust_1.Location = new System.Drawing.Point(725, 480);
+            this.kust_1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kust_1.Name = "kust_1";
-            this.kust_1.Size = new System.Drawing.Size(77, 31);
+            this.kust_1.Size = new System.Drawing.Size(103, 38);
             this.kust_1.TabIndex = 1;
             this.kust_1.Text = "Kustuta";
             this.kust_1.UseVisualStyleBackColor = true;
@@ -80,9 +85,10 @@
             // 
             this.ostukorv_lbl.AutoSize = true;
             this.ostukorv_lbl.Font = new System.Drawing.Font("Cascadia Mono", 13F);
-            this.ostukorv_lbl.Location = new System.Drawing.Point(587, 32);
+            this.ostukorv_lbl.Location = new System.Drawing.Point(773, 58);
+            this.ostukorv_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ostukorv_lbl.Name = "ostukorv_lbl";
-            this.ostukorv_lbl.Size = new System.Drawing.Size(98, 24);
+            this.ostukorv_lbl.Size = new System.Drawing.Size(117, 29);
             this.ostukorv_lbl.TabIndex = 6;
             this.ostukorv_lbl.Text = "Ostukorv";
             // 
@@ -90,34 +96,39 @@
             // 
             this.tooded.AutoSize = true;
             this.tooded.Font = new System.Drawing.Font("Cascadia Mono", 13F);
-            this.tooded.Location = new System.Drawing.Point(152, 44);
+            this.tooded.Location = new System.Drawing.Point(317, 58);
+            this.tooded.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tooded.Name = "tooded";
-            this.tooded.Size = new System.Drawing.Size(76, 24);
+            this.tooded.Size = new System.Drawing.Size(91, 29);
             this.tooded.TabIndex = 8;
             this.tooded.Text = "Tooded";
             // 
             // list_box
             // 
             this.list_box.FormattingEnabled = true;
-            this.list_box.Location = new System.Drawing.Point(12, 81);
+            this.list_box.ItemHeight = 16;
+            this.list_box.Location = new System.Drawing.Point(16, 100);
+            this.list_box.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.list_box.Name = "list_box";
-            this.list_box.Size = new System.Drawing.Size(111, 303);
+            this.list_box.Size = new System.Drawing.Size(147, 372);
             this.list_box.TabIndex = 9;
             this.list_box.SelectedIndexChanged += new System.EventHandler(this.list_box_SelectedIndexChanged);
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(129, 81);
+            this.dataGridView2.Location = new System.Drawing.Point(172, 100);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(308, 303);
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.Size = new System.Drawing.Size(411, 373);
             this.dataGridView2.TabIndex = 10;
             // 
             // ostja_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 546);
+            this.ClientSize = new System.Drawing.Size(1017, 672);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.list_box);
             this.Controls.Add(this.tooded);
@@ -126,6 +137,7 @@
             this.Controls.Add(this.kust_1);
             this.Controls.Add(this.lisa_toode_btn);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ostja_form";
             this.Text = "Ostja";
             this.Load += new System.EventHandler(this.muuja_Load);

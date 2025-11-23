@@ -16,38 +16,41 @@ namespace epood_toode
 {
     public partial class ostja_form : Form
     {
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\opilane\source\repos\epood\Tooded_DB.mdf");
+        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\oleks\Desktop\C#\toode_2\Tooded_DB.mdf");
         SqlCommand command;
         SqlDataAdapter adapter_toode, adapter_kategooria;
-        DataTable dt_toode;
+        DataTable dt_toode, dt_kat;
         DataTable ostukorv = new DataTable();
-
-
-        int Id = 0;
-        int kogus = 0;
-        int kogus_naitamine = 0;
-
         public ostja_form()
         {
             InitializeComponent();
             NaitaAndmed();
-            text_box.Items.Add("Kollane");
-            lb.Items.Add("Rosa");
-            lb.Items.Add("Roheline");
-            lb.Items.Add("Punane");
-            lb.Items.Add("Sinine");
+            kategooria_list_box();
+        }
+
+        public void kategooria_list_box()
+        {
+            dt_kat = new DataTable();
+            adapter_kategooria = new SqlDataAdapter(
+                "SELECT Id, Kategooria_nimetus FROM Kategooriatable",
+                connect
+            );
+            adapter_kategooria.Fill(dt_kat);
+
+            list_box.DataSource = dt_kat;
+            list_box.DisplayMember = "Kategooria_nimetus";
+            list_box.ValueMember = "Id";
         }
 
         public void NaitaAndmed()
         {
-            
             dt_toode = new DataTable();
             adapter_toode = new SqlDataAdapter("SELECT Toodenimetus, Hind, Kogus FROM Toodetabel WHERE Kogus > 0",connect);    
             adapter_toode.Fill(dt_toode);
-            dataGridView1.DataSource = null;
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            dataGridView1.DataSource = dt_toode;
+            dataGridView2.DataSource = null;
+            dataGridView2.Rows.Clear();
+            dataGridView2.Columns.Clear();
+            dataGridView2.DataSource = dt_toode;
         }
 
         private void lisa_toode_btn_Click(object sender, EventArgs e)
@@ -101,9 +104,25 @@ namespace epood_toode
 
         private void list_box_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (list_box.SelectedValue == null) return;
 
+            int kategooriaId;
 
+            if (!int.TryParse(list_box.SelectedValue.ToString(), out kategooriaId))
+                return;
+
+            DataTable dt_tooted = new DataTable();
+            SqlDataAdapter adapter_toode = new SqlDataAdapter(
+                "SELECT Toodenimetus, Hind, Kogus FROM Toodetabel WHERE Id = @kat AND Kogus > 0",
+                connect
+            );
+
+            adapter_toode.SelectCommand.Parameters.AddWithValue("@kat", kategooriaId);
+            adapter_toode.Fill(dt_tooted);
+
+            dataGridView2.DataSource = dt_tooted;
         }
+
 
         private void muuja_Load(object sender, EventArgs e)
         {

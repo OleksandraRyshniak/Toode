@@ -16,7 +16,7 @@ namespace epood_tooded
 {
     public partial class muuja_form : Form
     {
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\opilane\source\repos\epood\Tooded_DB.mdf");
+        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\oleks\Desktop\C#\toode_2\Tooded_DB.mdf");
         SqlCommand command;
         SqlDataAdapter adapter_toode, adapter_kategooria;
         public muuja_form()
@@ -76,7 +76,7 @@ namespace epood_tooded
                 }
             }
             dataGridView1.Columns.Add(combo_kat);
-            pb.Image = Image.FromFile(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\epood\images"), "pood.png"));
+            pb.Image = Image.FromFile(Path.Combine(Path.GetFullPath(@"C:\Users\oleks\Desktop\C#\toode_2\images"), "pood.png"));
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
             connect.Close();
         }
@@ -224,7 +224,7 @@ namespace epood_tooded
             kogus_text_box.Text = "";
             hind_text_box.Text = "";
             kat_com_box.SelectedItem = null;
-            using (FileStream fs = new FileStream(Path.Combine(Path.GetFullPath(@"C:\Users\opilane\source\repos\epood\images"), "pood.png"), FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(Path.Combine(Path.GetFullPath(@"C:\Users\oleks\Desktop\C#\toode_2\images"), "pood.png"), FileMode.Open, FileAccess.Read))
             {
                 pb.Image = Image.FromStream(fs);
             }
@@ -237,10 +237,10 @@ namespace epood_tooded
                 return;
             }
             open = new OpenFileDialog();
-            open.InitialDirectory = @"C:\Users\opilane\source\repos\epood\epood_pic";
+            open.InitialDirectory = @"C:\Users\oleks\Desktop\C#\toode_2\epood_pic";
             open.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
 
-            FileInfo open_info = new FileInfo(@"C:\Users\opilane\source\repos\epood\epood_pic" + open.FileName);
+            FileInfo open_info = new FileInfo(@"C:\Users\oleks\Desktop\C#\toode_2\epood_pic" + open.FileName);
             if (open.ShowDialog() == DialogResult.OK && toode_text_box.Text != null)
             {
                 save = new SaveFileDialog();
