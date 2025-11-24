@@ -26,6 +26,9 @@ namespace epood_toode
             InitializeComponent();
             NaitaAndmed();
             kategooria_list_box();
+            ostukorv.Columns.Add("Toodenimetus", typeof(string));
+            ostukorv.Columns.Add("Hind", typeof(decimal));
+            ostukorv.Columns.Add("Kogus", typeof(int));
         }
 
         public void kategooria_list_box()
@@ -55,15 +58,15 @@ namespace epood_toode
 
         private void lisa_toode_btn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            if (dataGridView2.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Valige toode!");
                 return;
             }
 
-            string nimetus = dataGridView1.SelectedRows[0].Cells["Toodenimetus"].Value.ToString();
-            decimal hind = Convert.ToDecimal(dataGridView1.SelectedRows[0].Cells["Hind"].Value);
-            int kogus_baas = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Kogus"].Value);
+            string nimetus = dataGridView2.SelectedRows[0].Cells["Toodenimetus"].Value.ToString();
+            decimal hind = Convert.ToDecimal(dataGridView2.SelectedRows[0].Cells["Hind"].Value);
+            int kogus_baas = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["Kogus"].Value);
 
 
             if (kogus_baas <= 0)
@@ -98,8 +101,10 @@ namespace epood_toode
                 row["Hind"] = hind;
                 row["Kogus"] = 1;
                 ostukorv.Rows.Add(row);
+                dataGridView1.DataSource = ostukorv;
             }
             NaitaAndmed();
+            ArvutaKogusumma();
         }
 
         private void list_box_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,7 +118,7 @@ namespace epood_toode
 
             DataTable dt_tooted = new DataTable();
             SqlDataAdapter adapter_toode = new SqlDataAdapter(
-                "SELECT Toodenimetus, Hind, Kogus FROM Toodetabel WHERE Id = @kat AND Kogus > 0",
+                "SELECT Toodenimetus, Hind, Kogus FROM Toodetabel WHERE Kategooriad = @kat AND Kogus > 0",
                 connect
             );
 
@@ -123,7 +128,81 @@ namespace epood_toode
             dataGridView2.DataSource = dt_tooted;
         }
 
+        private void kust_1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Valige toode ostukorvist!");
+                return;
+            }
+            string nimetus = dataGridView1.SelectedRows[0].Cells["Toodenimetus"].Value.ToString();
+            foreach (DataRow r in ostukorv.Rows)
+            {
+                if (r["Toodenimetus"].ToString() == nimetus)
+                {
+                    int kogus = Convert.ToInt32(r["Kogus"]);
+                    if (kogus > 0)
+                    {
+                        r["Kogus"] = kogus - 1;
+                        using (SqlCommand cmd = new SqlCommand(
+                            "UPDATE Toodetabel SET Kogus = Kogus + 1 WHERE Toodenimetus=@n", connect))
+                        {
+                            cmd.Parameters.AddWithValue("@n", nimetus);
+                            connect.Open();
+                            cmd.ExecuteNonQuery();
+                            connect.Close();
+                        }
+                    }
+                    if (Convert.ToInt32(r["Kogus"]) == 0)
+                    {
+                        ostukorv.Rows.Remove(r);
+                    }
+                    break;
+                }
+            }
+            dataGridView1.DataSource = ostukorv;
+            NaitaAndmed();
+            ArvutaKogusumma();
+        }
 
+        private void maksma_Click(object sender, EventArgs e)
+        {
+            if (ostukorv.Rows.Count == 0)
+            {
+                MessageBox.Show("Ostukorv on tühi!");
+                return;
+            }
+            else
+            {
+                decimal total = 0;
+
+                foreach (DataRow r in ostukorv.Rows)
+                {
+                    decimal hind = Convert.ToDecimal(r["Hind"]);
+                    int kogus = Convert.ToInt32(r["Kogus"]);
+                    total += hind * kogus;
+                }
+
+                MessageBox.Show($"Ostukorvi kogusumma: "+ total.ToString("0.00")+" €"+ "\nOst sooritatud! Aitäh!");
+                ostukorv.Rows.Clear();
+                dataGridView1.DataSource = ostukorv;
+                ArvutaKogusumma();
+            }
+        }
+
+        private void ArvutaKogusumma()
+        {
+            decimal total = 0;
+
+            foreach (DataRow r in ostukorv.Rows)
+            {
+                decimal hind = Convert.ToDecimal(r["Hind"]);
+                int kogus = Convert.ToInt32(r["Kogus"]);
+                total += hind * kogus;
+            }
+
+            total_label.Text = "Kokku: " + total.ToString("0.00") + " €";
+        }
         private void muuja_Load(object sender, EventArgs e)
         {
 
